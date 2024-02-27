@@ -104,7 +104,7 @@ class Scheduler(object):
 		|                             | futures finish or are cancelled.       |
 		+-----------------------------+----------------------------------------+
         """
-        jobs = [asyncio.create_task(job.run()) for job in self.jobs if job.should_run]
+        jobs = [asyncio.create_task(self._run_job(job)) for job in self.jobs if job.should_run]
         if not jobs:
             return [], []
 
